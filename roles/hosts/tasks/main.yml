@@ -1,6 +1,6 @@
 ---
 - name: Scan wireless network for hosts
-  command: "nmap -A -p 22 -oG=/home/paxtonf/GIT/ansible-generate-hosts/nmapwifi.txt  10.50.102-103.*"
+  command: "nmap -A -p 22 -oG=/home/dadmin/GIT/ansible-generate-hosts/nmapwifi.txt  10.50.102-103.*"
   register: nmapwifi
   ignore_errors: True
 
@@ -12,26 +12,26 @@
 - name: Check for previous nmapwifilinux file and remove
   file:
     state: absent
-    path: "/home/paxtonf/GIT/ansible-generate-hosts/nmapwifilinux.txt"
+    path: "/home/dadmin/GIT/ansible-generate-hosts/nmapwifilinux.txt"
 
 - name: Get wireless Linux hosts and format file
-  shell: 'grep "Linux" /home/paxtonf/GIT/ansible-generate-hosts/nmapwifi.txt /home/paxtonf/GIT/ansible-generate-hosts/nmapeth.txt | tee /home/paxtonf/GIT/ansible-generate-hosts/nmapwifilinux.txt'
+  shell: 'grep "Linux" /home/dadmin/GIT/ansible-generate-hosts/nmapwifi.txt /home/dadmin/GIT/ansible-generate-hosts/nmapeth.txt | tee /home/dadmin/GIT/ansible-generate-hosts/nmapwifilinux.txt'
   register: grepwifi
   ignore_errors: True
 
 - name: Check for previous nmapwififormat file and remove
   file:
     state: absent
-    path: "/home/paxtonf/GIT/ansible-generate-hosts/nmapwififormat"
+    path: "/home/dadmin/GIT/ansible-generate-hosts/nmapwififormat"
 
 - name: Collect wireless IPs
-  shell: 'grep -o "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}" /home/paxtonf/GIT/ansible-generate-hosts/nmapwifilinux.txt | tee /home/paxtonf/GIT/ansible-generate-hosts/nmapwififormat.txt'
+  shell: 'grep -o "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}" /home/dadmin/GIT/ansible-generate-hosts/nmapwifilinux.txt | tee /home/dadmin/GIT/ansible-generate-hosts/nmapwififormat.txt'
 
 - name: SSH test
-  shell: "scp dadmin@10.50.102.7:/etc/hostname /home/dadmin/GIT/ansible-generate-hosts"
+  shell: "scp dadmin@10.50.102.60:/etc/hostname /home/dadmin/GIT/ansible-generate-hosts"
 
 - name: Rename
-  shell: "mv /home/dadmin/GIT/ansible-generate-hosts/hostname /home/dadmin/GIT/ansible-generate-hosts/10501027"
+  shell: "mv /home/dadmin/GIT/ansible-generate-hosts/hostname /home/dadmin/GIT/ansible-generate-hosts/105010260"
 
 #- name: SSH into n wirless hosts and collect hostname
 #  shell: 'NUM=1 | sed "${${NUM}q;d}" nmapwififormat.txt

@@ -29,3 +29,8 @@
 
 - name: Gather hostnames with shell script
   script: gatherhostname.sh
+
+- name: Merge IP files into one host file
+  assemble:
+    src: /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/hosts
+    dest: /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/etc/ansible/hosts

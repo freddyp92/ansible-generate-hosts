@@ -1,0 +1,6 @@
+#!/usr/bin/expect
+        spawn scp dadmin@${IP}:/etc/hostname /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/hosts
+        set pass ""
+        expect {
+        password: {send "$pass\r"; exp_continue}
+                  }

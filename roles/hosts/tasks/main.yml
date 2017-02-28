@@ -1,31 +1,28 @@
 ---
 - name: Scan wireless network for hosts
-  command: "nmap -A -p 22 -oG=/home/dadmin/GIT/ansible-generate-hosts/nmapwifi.txt  10.50.102-103.*"
-  register: nmapwifi
+  command: "nmap -A -p 22 -oG=/home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmapwifi.txt  10.50.102-103.*"
   ignore_errors: True
 
 - name: Scan wired network for hosts
-  command: "nmap -A -p 22 -oG=/home/dadmin/GIT/ansible-generate-hosts/nmapeth.txt  192.168.150.*"
-  register: nmapeth
+  command: "nmap -A -p 22 -oG=/home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmapeth.txt  192.168.150.*"
   ignore_errors: True
 
 - name: Check for previous nmapwifilinux file and remove
   file:
     state: absent
-    path: "/home/dadmin/GIT/ansible-generate-hosts/nmaplinux.txt"
+    path: "/home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmaplinux.txt"
 
 - name: Get Linux hosts and format file
-  shell: 'grep "Linux" /home/dadmin/GIT/ansible-generate-hosts/nmapwifi.txt /home/dadmin/GIT/ansible-generate-hosts/nmapeth.txt | tee /home/dadmin/GIT/ansible-generate-hosts/nmaplinux.txt'
-  register: grepwifi
+  shell: 'grep "Linux" /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmapwifi.txt /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmapeth.txt | tee /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmaplinux.txt'
   ignore_errors: True
 
 - name: Check for previous nmapwififormat file and remove
   file:
     state: absent
-    path: "/home/dadmin/GIT/ansible-generate-hosts/nmapips"
+    path: "/home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmapips.txt"
 
 - name: Collect wireless IPs
-  shell: 'grep -o "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}" /home/dadmin/GIT/ansible-generate-hosts/nmaplinux.txt | tee /home/dadmin/GIT/ansible-generate-hosts/nmapips.txt'
+  shell: 'grep -o "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}" /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmaplinux.txt | tee /home/dadmin/GIT/ansible-generate-hosts/roles/hosts/files/nmapips.txt'
 
 - name: Gather hostnames with shell script
   script: gatherhostname.sh

@@ -10,6 +10,8 @@ Note: The password variable in the gatherhostnames.sh script needs to be changed
 
 To do:
 
-Merge all IP files to form the ansible hosts file
+~~Merge all IP files to form the ansible hosts file~~
+
+...
 
 Add password in gatherhostnames.sh script to automate the entering of the admin passwords

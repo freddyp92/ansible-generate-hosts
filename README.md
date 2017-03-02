@@ -16,7 +16,7 @@ First clone this repository to your local machine and then inside the /ansible-g
 ansible-playbook -b -K site.yml
 ```
 
-**After running this playbook your /etc/ansible/hosts file will be changed, please make a backup of this file beforehand to avoid losing any previous data in your hosts file.**
+**IMPORTANT: After running this playbook your /etc/ansible/hosts file will be changed, please make a backup of this file beforehand to avoid losing any previous data in your hosts file.**
 
 ---
 
